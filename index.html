@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-app lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+    <style type="text/css">
+        ul > li, a {
+            cursor: pointer;
+        }
+    </style>
+    <title>Gioca la tua schedina per il campionato Platypus!</title>
+</head>
+<body>
+<div class="navbar navbar-default" id="navbar" style="background: #09aff0">
+    <a href="http://milano.plsport.it"><img src="http://milano.plsport.it/wp-content/uploads/2016/01/plsport_125x50.png"
+                                            style="padding-left: 50%;"></a>
+    <!--<div class="container" id="navbar-container">
+    <div class="navbar-header">
+        <span>Schedina campionato Platypus</span>
+    </div> -->
+    <!-- /.navbar-header 
+    <div class="navbar-header pull-right" role="navigation" style="background: #09aff0; padding-top:15px; padding-right: 5%;">
+        <a href="https://www.facebook.com/SportPlatypus/?fref=ts"><i class="fa fa-facebook fa-2" style="color:white"></i></a>
+    </div>
+    </div>-->
+</div>
+
+
+<div>
+    <div class="container">
+        <br/>
+
+        <div ng-view="" id="ng-view"></div>
+
+    </div>
+</div>
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script src="app/app.js"></script>
+</body>
+</html>
