@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!-- MODIFY/INSERT OFFERSET MODAL -->
+        <form name="saveSchedina">
+            <div
+                    class="modal"
+                    id="save"
+                    tabindex="-1"
+                    aria-labelledby="Salvataggio Schedina"
+                    aria-hidden="true">
+                <div class="modal-dialog">
+                    <div
+                            class="modal-content"
+                            style="padding: 10px; width: 500px;">
+                        <div class="modal-header">
+                    <span
+                            class="modalTitle">Salvataggio Schedina</span>
+                            <button
+                                    type="button"
+                                    class="close"
+                                    aria-label="Chiudi"
+                                    ng-click="closeSalvataggio()">
+                        <span
+                                class="closeit"
+                                aria-hidden="true">&times;</span>
+                            </button>
+
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label ng-if="checkSchedina()"
+                                                   class="control-label col-sm-12"
+                                            >Salvare la schedina? Dopo la conferma non sarà possibile
+                                                modificarla </label>
+                                            <label ng-if="!checkSchedina()"
+                                                   class="control-label col-sm-12"
+                                            >Compilare tutta la schedina prima di effettuare il salvataggio
+                                            </label>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer addfield-foot">
+                                <button
+                                        ng-show="!readOnly"
+                                        class="btn btn-success glyphicon glyphicon-ok"
+                                        type="button"
+                                        ng-click="salvaSchedina()">
+                                    Salva Schedina
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END MODIFY OFFERSET MODAL --></title>
+</head>
+<body>
+
+</body>
+</html>

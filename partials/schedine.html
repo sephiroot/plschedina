@@ -1,0 +1,118 @@
+<style type="text/css">
+    .red {
+        background-color: #EFB0B0 !important;
+    }
+
+    .green {
+        background-color: #99FF99 !important;
+    }
+</style>
+<div class="row">
+    <!--<nav class= "navbar navbar-default" role= "navigation" >
+    <div class= "navbar-header" >-->
+    <div ng-if="shownDay == currentDay">
+        <blockquote><h4>Gioca
+            la tua schedina per la giornata {{shownDay}} di campionato Platypus!</h4></blockquote>
+    </div>
+    <div ng-if="shownDay < currentDay">
+        <blockquote><h4>Partite già disputate per questa giornata!</h4></blockquote>
+    </div>
+    <div ng-if="shownDay > currentDay">
+        <blockquote><h4>Schedina non ancora disponibile per questa giornata</h4></blockquote>
+    </div>
+        <span ng-repeat="n in daysList">
+            <button type="button" ng-click="getOtherDay(n)" class="btn-xs btn-default"
+                    ng-show="n == shownDay">{{n}}
+            </button>
+             <button type="button" ng-click="getOtherDay(n)" class="btn-xs btn-danger"
+                     ng-show="n > currentDay && n != shownDay">{{n}}
+             </button>
+             <button type="button" ng-click="getOtherDay(n)" class="btn-xs btn-success"
+                     ng-show="n < currentDay && n != shownDay">{{n}}
+             </button>
+             <button type="button" ng-click="getOtherDay(n)" class="btn-xs btn-warning"
+                     ng-show="n == currentDay && n != shownDay">{{n}}
+             </button>
+        </span>
+
+    <div style="float: right">
+        <span class="alert alert-danger" ng-if="mieSchedine[shownDay].showNoSave">
+                <strong>ATTENZIONE!</strong> La schedina non è completamente compilata, impossibile salvare.
+            </span>
+    </div>
+    <!--</div>-->
+    <div style="padding-top: 1%; padding-bottom: 1%">
+        <span ng-show="days.length > 0" style="padding-top: 1%; padding-bottom: 1%; float: right">
+            <button class="btn btn btn-danger glyphicon glyphicon-repeat" ng-click="resetSchedina()"
+                    ng-if="!readOnly(mieSchedine[shownDay])">
+                Reset
+            </button>
+            <button class="btn btn btn-success glyphicon glyphicon-floppy-disk"
+                    data-toggle="modal" data-target="#saveModal"
+                    ng-click="salvaSchedina()" ng-if="!readOnly(mieSchedine[shownDay])"> Salva
+            </button>
+        </span>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <th>In casa</th>
+            <th>Goal</th>
+            <th>Ospiti</th>
+            <th>Goal</th>
+            <th>Data</th>
+            <th>Risultato Giocato</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="data in mieSchedine[shownDay].partite">
+                <td ng-class="{red : !checkResult(data) && shownDay < currentDay, green : checkResult(data) && data.OWNER_SCORE != null && data.GUEST_SCORE != null}">
+                    {{data.OWNERS}}
+                </td>
+                <td ng-class="{red : !checkResult(data) && shownDay < currentDay, green : checkResult(data) && data.OWNER_SCORE != null && data.GUEST_SCORE != null}">
+                    {{data.OWNER_SCORE}}
+                </td>
+                <td ng-class="{red : !checkResult(data) && shownDay < currentDay, green : checkResult(data) && data.OWNER_SCORE != null && data.GUEST_SCORE != null}">
+                    {{data.GUESTS}}
+                </td>
+                <td ng-class="{red : !checkResult(data) && shownDay < currentDay, green : checkResult(data) && data.OWNER_SCORE != null && data.GUEST_SCORE != null}">
+                    {{data.GUEST_SCORE}}
+                </td>
+                <td ng-class="{red : !checkResult(data) && shownDay < currentDay, green : checkResult(data) && data.OWNER_SCORE != null && data.GUEST_SCORE != null}">
+                    {{data.DATE}}
+                </td>
+                <td ng-class="{red : !checkResult(data) && shownDay < currentDay, green : checkResult(data) && data.OWNER_SCORE != null && data.GUEST_SCORE != null}">
+                    <div ng-if="!readOnly(mieSchedine[shownDay])">
+                        <label>
+                            <input type="radio" ng-model="data.RESULT" value="1" ng-disabled="shownDay != currentDay"
+                                   ng-checked="data.RESULT == 1">
+                            1
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="data.RESULT" value="X" ng-disabled="shownDay != currentDay"
+                                   ng-checked="data.RESULT == X">
+                            X
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="data.RESULT" value="2" ng-disabled="shownDay != currentDay"
+                                   ng-checked="data.RESULT == 2">
+                            2
+                        </label>
+                    </div>
+                    <div ng-if="readOnly(mieSchedine[shownDay])">
+                        <b> {{data.RESULT}}</b>
+                    </div>
+                </td>
+                <!-- <img src="images/nDn.png" style="width: 15px; height: 15px;"
+                      ng-if="!checkResult(data) && shownDay < currentDay">
+                 <img src="images/nUp.png" style="width: 15px; height: 15px;"
+                      ng-if="checkResult(data) && shownDay < currentDay">-->
+                <!--<td><a href="#/edit-customer/{{data.customerNumber}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Customer</a></td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="col-md-12" ng-show="days.length == 0">
+    <div class="col-md-12">
+        <h4>Nessuna partita trovata per questa giornata</h4>
+    </div>
+</div>
