@@ -3,10 +3,13 @@
 <script src="js/angular-route.min.js"></script>
 <script src="app/app.js"></script>
 <script src="app/services.js"></script>
-<html ng-app="plSchedina" ng-app lang="en">
+<html ng-app="plSchedina"
+      ng-app
+      lang="en">
 <head>
     <meta charset="utf-8">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css"
+          rel="stylesheet">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
     <style type="text/css">
         ul > li, a {
@@ -16,29 +19,49 @@
     <title>Gioca la tua schedina per il campionato Platypus!</title>
 </head>
 <body>
-<div class="navbar navbar-default" id="navbar" style="background: #09aff0">
-    <a href="http://milano.plsport.it"><img src="http://milano.plsport.it/wp-content/uploads/2016/01/plsport_125x50.png"
-                                            style="padding-left: 50%;"></a>
-    <!--<div class="container" id="navbar-container">
-    <div class="navbar-header">
-        <span>Schedina campionato Platypus</span>
-    </div> -->
-    <!-- /.navbar-header 
-    <div class="navbar-header pull-right" role="navigation" style="background: #09aff0; padding-top:15px; padding-right: 5%;">
-        <a href="https://www.facebook.com/SportPlatypus/?fref=ts"><i class="fa fa-facebook fa-2" style="color:white"></i></a>
+<div class="navbar navbar-default"
+     id="navbar"
+     style="text-align: center; background: #09aff0">
+    <div style="display: inline-block">
+        <a href="http://milano.plsport.it"><img
+                src="http://milano.plsport.it/wp-content/uploads/2016/01/plsport_125x50.png"></a>
     </div>
-    </div>-->
 </div>
-
-
-<div>
+<div style="text-align: center;"
+     ng-if=" !user.logged">
+    <div style=" display: inline-block">
+        <h2>Login</h2>
+        <label for="inputEmail"
+               class="sr-only">Email</label>
+        <input type="email"
+               id="inputEmail"
+               ng-model="user.mail"
+               class="form-control"
+               placeholder="Email address"
+               required="true"
+               autofocus="">
+        <label for="inputPassword"
+               class="sr-only">Password</label>
+        <input type="password"
+               id="inputPassword"
+               ng-model="user.pwd"
+               class="form-control"
+               placeholder="Password"
+               required="true">
+        <br />
+        <button class="btn btn-md btn-primary btn-block"
+                type="submit"
+                ng-click="login()">Entra
+        </button>
+    </div>
+</div>
+<div ng-if="user.logged">
     <div class="container">
-        <br/>
+        <br />
 
-        <div ng-view="" id="ng-view"></div>
-
+        <div ng-view=""
+             id="ng-view"></div>
     </div>
-</div>
 </div>
 </body>
 </html>

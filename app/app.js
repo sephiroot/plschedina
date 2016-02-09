@@ -1,6 +1,16 @@
-var plSchedina = angular.module('plSchedina', ['ngRoute']);
+var plSchedina = angular.module('plSchedina', ['ngRoute']).run(function ($rootScope) {
+    $rootScope.user = {};
+    $rootScope.user.mail = "";
+    $rootScope.user.pwd = "";
+    $rootScope.user.logged = false;
 
-plSchedina.controller('listCtrl', function ($scope, services) {
+    $rootScope.login = function () {
+        $rootScope.user.logged = true;
+        console.log($rootScope.user.logged);
+    }
+});
+
+plSchedina.controller('listCtrl', ['$scope', '$rootScope', 'services', function ($scope, $rootScope, services) {
     $scope.currentDay = 3;  // giornata corrente di campionato
     $scope.shownDay = 0; // giorno correntemente selezionato
     $scope.daysList = ['1', '2', '3', '4'];
@@ -34,7 +44,7 @@ plSchedina.controller('listCtrl', function ($scope, services) {
             $scope.days = $scope.mieSchedine[chosenDay].partite;
             $scope.shownDay = chosenDay;
         }
-    }
+    };
 
     $scope.checkMatchResult = function (partita) {
         if (partita.OWNER_SCORE > partita.GUEST_SCORE) {
@@ -44,7 +54,7 @@ plSchedina.controller('listCtrl', function ($scope, services) {
         } else {
             return partita.RESULT == 2;
         }
-    }
+    };
 
     /* reimposta la schedina della giornata corrente */
     $scope.resetSchedina = function () {
@@ -52,20 +62,20 @@ plSchedina.controller('listCtrl', function ($scope, services) {
         for (i = 0; i < $scope.days.length; i++) {
             $scope.mieSchedine[$scope.currentDay].partite[i].RESULT = null;
         }
-    }
+    };
 
     $scope.checkSalvataggio = function () {
         for (i = 0; i < $scope.days.length; i++) {
             console.log($scope.mieSchedine[$scope.currentDay].partite[i]);
             if ($scope.mieSchedine[$scope.currentDay].partite[i].RESULT == null
-                    || $scope.mieSchedine[$scope.currentDay].partite[i].RESULT == -1) {
+                || $scope.mieSchedine[$scope.currentDay].partite[i].RESULT == -1) {
                 $scope.mieSchedine[$scope.shownDay].showNoSave = true;
                 $scope.mieSchedine[$scope.currentDay].saved = false;
                 return false;
             }
         }
         return true;
-    }
+    };
 
     $scope.setResult = function (data, value) {
         if (data.RESULT === value) {
@@ -75,7 +85,7 @@ plSchedina.controller('listCtrl', function ($scope, services) {
             data.RESULT = value;
         }
         console.log(data.RESULT);
-    }
+    };
 
     /* salva la schedhina della giornata corrente */
     $scope.salvaSchedina = function () {
@@ -84,7 +94,7 @@ plSchedina.controller('listCtrl', function ($scope, services) {
             $scope.mieSchedine[$scope.currentDay].showNoSave = false;
             return true;
         }
-    }
+    };
 
     $scope.readOnly = function (giornata) {
         if ($scope.shownDay == $scope.currentDay) {
@@ -92,7 +102,7 @@ plSchedina.controller('listCtrl', function ($scope, services) {
         }
         return true;
     }
-})
+}])
 ;
 
 plSchedina.controller('editCtrl', function ($scope, $rootScope, $location, $routeParams, services, customer) {
