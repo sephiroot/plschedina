@@ -36,7 +36,7 @@ plSchedina.controller('listCtrl', function ($scope, services) {
         }
     }
 
-    $scope.checkResult = function (partita) {
+    $scope.checkMatchResult = function (partita) {
         if (partita.OWNER_SCORE > partita.GUEST_SCORE) {
             return partita.RESULT == 1;
         } else if (partita.OWNER_SCORE == partita.GUEST_SCORE) {
@@ -57,7 +57,8 @@ plSchedina.controller('listCtrl', function ($scope, services) {
     $scope.checkSalvataggio = function () {
         for (i = 0; i < $scope.days.length; i++) {
             console.log($scope.mieSchedine[$scope.currentDay].partite[i]);
-            if ($scope.mieSchedine[$scope.currentDay].partite[i].RESULT == null) {
+            if ($scope.mieSchedine[$scope.currentDay].partite[i].RESULT == null
+                    || $scope.mieSchedine[$scope.currentDay].partite[i].RESULT == -1) {
                 $scope.mieSchedine[$scope.shownDay].showNoSave = true;
                 $scope.mieSchedine[$scope.currentDay].saved = false;
                 return false;
@@ -66,10 +67,21 @@ plSchedina.controller('listCtrl', function ($scope, services) {
         return true;
     }
 
+    $scope.setResult = function (data, value) {
+        if (data.RESULT === value) {
+            console.log("annullo valore");
+            data.RESULT = null;
+        } else {
+            data.RESULT = value;
+        }
+        console.log(data.RESULT);
+    }
+
     /* salva la schedhina della giornata corrente */
     $scope.salvaSchedina = function () {
         if ($scope.checkSalvataggio()) {
             $scope.mieSchedine[$scope.currentDay].saved = true;
+            $scope.mieSchedine[$scope.currentDay].showNoSave = false;
             return true;
         }
     }

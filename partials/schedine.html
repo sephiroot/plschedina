@@ -81,18 +81,18 @@
                 <td ng-class="{red : !checkResult(data) && shownDay < currentDay, green : checkResult(data) && data.OWNER_SCORE != null && data.GUEST_SCORE != null}">
                     <div ng-if="!readOnly(mieSchedine[shownDay])">
                         <label>
-                            <input type="radio" ng-model="data.RESULT" value="1" ng-disabled="shownDay != currentDay"
-                                   ng-checked="data.RESULT == 1">
+                            <input type="checkbox" ng-model="data.RESULT" ng-disabled="shownDay != currentDay"
+                                   ng-true-value="1" ng-false-value="-1">
                             1
                         </label>
                         <label>
-                            <input type="radio" ng-model="data.RESULT" value="X" ng-disabled="shownDay != currentDay"
-                                   ng-checked="data.RESULT == X">
+                            <input type="checkbox" ng-model="data.RESULT" ng-disabled="shownDay != currentDay"
+                                   ng-true-value="X" ng-false-value="-1">
                             X
                         </label>
                         <label>
-                            <input type="radio" ng-model="data.RESULT" value="2" ng-disabled="shownDay != currentDay"
-                                   ng-checked="data.RESULT == 2">
+                            <input type="checkbox" ng-model="data.RESULT" ng-disabled="shownDay != currentDay"
+                                   ng-true-value="2" ng-false-value="-1">
                             2
                         </label>
                     </div>
