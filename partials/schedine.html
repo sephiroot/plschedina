@@ -7,41 +7,55 @@
         background-color: #99FF99 !important;
     }
 </style>
-<div class="row"
-     ng-if="user.logged">
+<div ng-if="user.logged">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="http://milano.plsport.it">
+                    <img src="http://milano.plsport.it/wp-content/uploads/2016/01/plsport_125x50.png" />
+                </a>
+            </li>
+            <li>
+                <label style="color: white;"> {{user.mail}}</label>
+            </li>
+            <li>
+                <a href="#"> Schedina </a>
+            </li>
+        </ul>
+    </div>
     <div style="text-align: center">
-         <span class="alert alert-danger"
-               ng-if="mieSchedine[shownDay].showNoSave">
-                <strong>ATTENZIONE!</strong> La schedina non è completamente compilata, impossibile salvare.
-         </span>
-
-        <div style="text-align: right">
-            {{user.mail}}
+        <div style="padding-top: 5%">
+            <div>
+                 <span class="alert alert-danger"
+                       ng-if="mieSchedine[shownDay].showNoSave">
+                    <strong>ATTENZIONE!</strong> La schedina non è completamente compilata, impossibile salvare.
+                 </span>
+            </div>
+            <div style="padding-top: 5%">
+             <span ng-repeat="n in daysList">
+                <button type="button"
+                        ng-click="getOtherDay(n)"
+                        class="btn-xs btn-default"
+                        ng-show="n == shownDay">{{n}}
+                </button>
+                 <button type="button"
+                         ng-click="getOtherDay(n)"
+                         class="btn-xs btn-danger"
+                         ng-show="n > currentDay && n != shownDay">{{n}}
+                 </button>
+                 <button type="button"
+                         ng-click="getOtherDay(n)"
+                         class="btn-xs btn-success"
+                         ng-show="n < currentDay && n != shownDay">{{n}}
+                 </button>
+                 <button type="button"
+                         ng-click="getOtherDay(n)"
+                         class="btn-xs btn-warning"
+                         ng-show="n == currentDay && n != shownDay">{{n}}
+                 </button>
+            </span>
+            </div>
         </div>
-
-        <br />
-        <span ng-repeat="n in daysList">
-            <button type="button"
-                    ng-click="getOtherDay(n)"
-                    class="btn-xs btn-default"
-                    ng-show="n == shownDay">{{n}}
-            </button>
-             <button type="button"
-                     ng-click="getOtherDay(n)"
-                     class="btn-xs btn-danger"
-                     ng-show="n > currentDay && n != shownDay">{{n}}
-             </button>
-             <button type="button"
-                     ng-click="getOtherDay(n)"
-                     class="btn-xs btn-success"
-                     ng-show="n < currentDay && n != shownDay">{{n}}
-             </button>
-             <button type="button"
-                     ng-click="getOtherDay(n)"
-                     class="btn-xs btn-warning"
-                     ng-show="n == currentDay && n != shownDay">{{n}}
-             </button>
-        </span>
     </div>
     <!--<nav class= "navbar navbar-default" role= "navigation" >
     <div class= "navbar-header" >-->
