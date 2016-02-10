@@ -30,18 +30,21 @@ plSchedina.controller('listCtrl', ['$scope', '$rootScope', 'services', function 
 
     /* change day from navigator */
     $scope.getOtherDay = function (chosenDay) {
-        if (!$scope.mieSchedine[chosenDay]) {
-            $scope.mieSchedine[$scope.shownDay].showNoSave = false;
-            services.otherDay(chosenDay).then(function (data) {
-                $scope.days = data.data;
-                $scope.mieSchedine[chosenDay] = {};
-                $scope.mieSchedine[chosenDay].partite = [];
-                $scope.mieSchedine[chosenDay].partite = data.data;
-                $scope.shownDay = chosenDay;
-                console.log($scope.shownDay + " -- " + $scope.currentDay);
-            });
-        } else {
-            $scope.days = $scope.mieSchedine[chosenDay].partite;
+        if (chosenDay != $scope.shownDay) {
+            console.log("getOtherDay " + chosenDay);
+            if (!$scope.mieSchedine[chosenDay]) {
+                $scope.mieSchedine[$scope.shownDay].showNoSave = false;
+                $scope.mieSchedine[chosenDay].showNoSave = false;
+                services.otherDay(chosenDay).then(function (data) {
+                    $scope.mieSchedine[chosenDay] = {};
+                    $scope.mieSchedine[chosenDay].partite = [];
+                    $scope.mieSchedine[chosenDay].partite = data.data;
+                    $scope.days = $scope.mieSchedine[chosenDay].partite;
+                    console.log($scope.shownDay + " -- " + $scope.currentDay);
+                });
+            } else {
+                $scope.mieSchedine[chosenDay].showNoSave = false;
+            }
             $scope.shownDay = chosenDay;
         }
     };
