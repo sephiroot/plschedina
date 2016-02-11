@@ -34,7 +34,6 @@ plSchedina.controller('listCtrl', ['$scope', '$rootScope', 'services', function 
             console.log("getOtherDay " + chosenDay);
             if (!$scope.mieSchedine[chosenDay]) {
                 $scope.mieSchedine[$scope.shownDay].showNoSave = false;
-                $scope.mieSchedine[chosenDay].showNoSave = false;
                 services.otherDay(chosenDay).then(function (data) {
                     $scope.mieSchedine[chosenDay] = {};
                     $scope.mieSchedine[chosenDay].partite = [];
@@ -71,7 +70,8 @@ plSchedina.controller('listCtrl', ['$scope', '$rootScope', 'services', function 
         for (i = 0; i < $scope.days.length; i++) {
             console.log($scope.mieSchedine[$scope.currentDay].partite[i]);
             if ($scope.mieSchedine[$scope.currentDay].partite[i].RESULT == null
-                || $scope.mieSchedine[$scope.currentDay].partite[i].RESULT == -1) {
+                || $scope.mieSchedine[$scope.currentDay].partite[i].RESULT == -1
+                ||  $scope.mieSchedine[$scope.currentDay].partite[i].RESULT == "") {
                 $scope.mieSchedine[$scope.shownDay].showNoSave = true;
                 $scope.mieSchedine[$scope.currentDay].saved = false;
                 return false;
